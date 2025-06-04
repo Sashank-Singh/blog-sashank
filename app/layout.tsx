@@ -23,11 +23,26 @@ export default function RootLayout({
                 </a>
                 <div className="ml-4 w-2 h-2 bg-cyan-400 rounded-full pulse-glow"></div>
               </div>
-              <div className="flex items-center space-x-8">
-                <a href="/" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+              <div className="flex items-center space-x-6">
+                <a href="https://sashanksingh.com" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
                   HOME
                 </a>
-                <a href="/blogs" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+                <a href="https://sashanksingh.com/#about" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+                  ABOUT
+                </a>
+                <a href="https://sashanksingh.com/#skills" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+                  SKILLS
+                </a>
+                <a href="https://sashanksingh.com/#projects" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+                  PROJECTS
+                </a>
+                <a href="https://sashanksingh.com/#experience" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+                  EXPERIENCE
+                </a>
+                <a href="https://sashanksingh.com/#contact" className="font-cyber text-cyan-400 hover:text-pink-400 transition-all duration-300 hover:glow-text">
+                  CONTACT
+                </a>
+                <a href="/blogs" className="font-cyber text-purple-400 hover:text-pink-400 transition-all duration-300 hover:glow-text border-l border-cyan-400/30 pl-6">
                   BLOG
                 </a>
                 <div className="font-code text-xs text-gray-500">
