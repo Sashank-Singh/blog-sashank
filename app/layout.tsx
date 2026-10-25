@@ -3,6 +3,7 @@ import './globals.css'
 
 export const metadata = {
   metadataBase: new URL('https://blog.sashanksingh.com'),
+  verification: { google: 'O1lnmMtBO4vzAjIOuJnCwVbdLZMlYB3Q-U4vNTh2ZDM' },
   title: 'Sashank Singh - Digital Perspectives',
   description: 'Insights, opinions, and analysis on technology, innovation, and the future',
 }
