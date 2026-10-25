@@ -1,6 +1,6 @@
 import { strict as assert } from 'node:assert'
 import { test } from 'node:test'
-import { safeMarkdownHtml } from '../app/blogs/[id]/page'
+import { safeMarkdownHtml } from '../lib/article-markdown'
 
 test('renders headings and safe external links', () => {
   const html = safeMarkdownHtml('## A section\n\nSee [AgentTwin](https://agenttwin.si/what-is-agenttwin/).')
