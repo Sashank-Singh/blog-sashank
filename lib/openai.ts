@@ -1,8 +1,12 @@
 import OpenAI from 'openai'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+let openai: OpenAI | undefined
+
+function getOpenAI() {
+  const apiKey = process.env.OPENAI_API_KEY
+  if (!apiKey) throw new Error('OPENAI_API_KEY is not configured')
+  return (openai ??= new OpenAI({apiKey}))
+}
 
 export interface BlogPost {
   id: string
@@ -36,7 +40,7 @@ export async function generateOpinionPost(topic: string): Promise<Omit<BlogPost,
   }`
 
   try {
-    const completion = await openai.chat.completions.create({
+    const completion = await getOpenAI().chat.completions.create({
       model: "gpt-4",
       messages: [
         {
@@ -95,7 +99,7 @@ export async function generateNewsPost(topic: string): Promise<Omit<BlogPost, 'i
   }`
 
   try {
-    const completion = await openai.chat.completions.create({
+    const completion = await getOpenAI().chat.completions.create({
       model: "gpt-4",
       messages: [
         {
@@ -130,4 +134,4 @@ export async function generateNewsPost(topic: string): Promise<Omit<BlogPost, 'i
     console.error('Error generating news post:', error)
     throw new Error('Failed to generate news post')
   }
-} 
+}
