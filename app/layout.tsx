@@ -6,6 +6,12 @@ export const metadata = {
   description: 'Insights, opinions, and analysis on technology, innovation, and the future',
 }
 
+const agentTwinLinks = [
+  ['Product overview', 'https://agenttwin.si/what-is-agenttwin/'],
+  ['Workflow guides', 'https://agenttwin.si/guides/'],
+  ['Developer resources', 'https://agenttwin.si/developers/'],
+];
+
 export default function RootLayout({
   children,
 }: {
@@ -81,10 +87,17 @@ export default function RootLayout({
               <div className="text-gray-500 text-xs">
                 Technology & Innovation Blog © 2025 - Present. All rights reserved.
               </div>
+              <nav aria-label="AgentTwin resources" className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-3">
+                {agentTwinLinks.map(([label, href]) => (
+                  <a key={href} href={href} className="font-code text-xs text-cyan-400 hover:text-pink-400">
+                    {label}
+                  </a>
+                ))}
+              </nav>
             </div>
           </div>
         </footer>
       </body>
     </html>
   )
-} 
+}

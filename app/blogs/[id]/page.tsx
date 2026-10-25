@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { Cpu, Zap, Clock, ArrowLeft, Calendar, Brain, Terminal } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import BlogPostBody from './BlogPostBody'
 
 interface BlogPostPageProps {
   params: { id: string }
@@ -78,13 +79,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="hologram asymmetric-card p-8 md:p-12">
-          <div className="prose prose-cyber max-w-none">
-            {post.content.split('\n\n').map((paragraph, index) => (
-              <p key={index} className="mb-6 text-gray-300 leading-relaxed text-lg">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <BlogPostBody content={post.content} />
         </div>
 
         {/* AI Attribution */}
@@ -133,4 +128,4 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </div>
     </div>
   )
-} 
+}
