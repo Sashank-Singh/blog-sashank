@@ -4,9 +4,23 @@ import { Cpu, Zap, Clock, ArrowLeft, Calendar, Brain, Terminal } from 'lucide-re
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import BlogPostBody from './BlogPostBody'
+import type { Metadata } from 'next'
 
 interface BlogPostPageProps {
   params: { id: string }
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const post = await getBlogPost(params.id)
+  if (!post) return {}
+  const url = `https://blog.sashanksingh.com/blogs/${post.id}`
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: url },
+    openGraph: { type: 'article', title: post.title, description: post.excerpt, url, publishedTime: post.createdAt.toISOString() },
+    twitter: { card: 'summary', title: post.title, description: post.excerpt },
+  }
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -16,8 +30,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.createdAt.toISOString(),
+    mainEntityOfPage: `https://blog.sashanksingh.com/blogs/${post.id}`,
+    author: { '@type': 'Person', name: 'Sashank Singh', url: 'https://sashanksingh.com/' },
+  }
+
   return (
     <div className="min-h-screen bg-dark-gradient matrix-bg">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Header */}
       <div className="diagonal-section bg-gradient-to-br from-cyber-dark via-purple-900/20 to-cyan-900/20 pb-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
