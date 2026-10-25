@@ -2,6 +2,7 @@ import './globals.css'
 // Auto-generation system will initialize via API route instead
 
 export const metadata = {
+  metadataBase: new URL('https://blog.sashanksingh.com'),
   title: 'Sashank Singh - Digital Perspectives',
   description: 'Insights, opinions, and analysis on technology, innovation, and the future',
 }
