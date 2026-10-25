@@ -23,6 +23,9 @@ export default function Home() {
                   <br />
                   <span className="text-cyan-400">BLOG</span>
                 </h1>
+              <Link href="/blogs/agenttwin-retry-safety-20261025" className="inline-block font-code text-cyan-300 underline decoration-cyan-500/40 underline-offset-4 hover:text-pink-400 mb-6">
+                Latest: testing retry safety with final-state checks →
+              </Link>
                 <p className="text-xl text-gray-300 mb-8 max-w-2xl leading-relaxed">
                   Explore cutting-edge perspectives on technology, innovation, and the digital future. 
                   Fresh insights and analysis on the trends shaping our world.
