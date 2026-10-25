@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:article": "tsx --test test/article-renderer.test.ts"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.10",
@@ -17,13 +18,13 @@
     "date-fns": "^2.30.0",
     "dompurify": "^3.2.6",
     "lucide-react": "^0.294.0",
-    "marked": "^15.0.12",
     "next": "14.0.0",
     "openai": "^4.20.1",
     "postcss": "^8",
     "react": "^18",
     "react-dom": "^18",
     "tailwindcss": "^3.3.0",
+    "tsx": "^4.20.0",
     "vercel": "^42.3.0"
   },
   "devDependencies": {

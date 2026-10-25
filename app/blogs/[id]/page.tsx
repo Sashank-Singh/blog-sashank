@@ -3,8 +3,8 @@ import { format } from 'date-fns'
 import { Cpu, Zap, Clock, ArrowLeft, Calendar, Brain, Terminal } from 'lucide-react'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import BlogPostBody from './BlogPostBody'
 import type { Metadata } from 'next'
+import { safeMarkdownHtml } from '@/lib/article-markdown'
 
 interface BlogPostPageProps {
   params: { id: string }
@@ -29,6 +29,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound()
   }
+
+  const renderedBody = safeMarkdownHtml(post.content)
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -104,7 +106,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       {/* Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="hologram asymmetric-card p-8 md:p-12">
-          <BlogPostBody content={post.content} />
+          <div className="prose prose-cyber max-w-none [&_a]:text-cyan-400 [&_a]:underline [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-white [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:text-gray-300 [&_p]:leading-relaxed [&_p]:text-lg [&_p]:mb-6 [&_ul]:text-gray-300 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6 [&_li]:mb-2" dangerouslySetInnerHTML={{ __html: renderedBody }} />
         </div>
 
         {/* AI Attribution */}
