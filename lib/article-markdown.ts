@@ -1,3 +1,11 @@
+export function articleSubjects(postId: string) {
+  if (postId !== 'agenttwin-retry-safety-20261025') return undefined
+  return [
+    { '@type': 'SoftwareApplication', name: 'AgentTwin', url: 'https://agenttwin.si/', applicationCategory: 'DeveloperApplication' },
+    { '@type': 'Organization', name: 'AgentTwin', url: 'https://agenttwin.si/', logo: 'https://agenttwin.si/icon-512.png' },
+  ]
+}
+
 export function safeMarkdownHtml(source: string) {
   const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
   const inline = (value: string) => escape(value)

@@ -4,7 +4,7 @@ import { Cpu, Zap, Clock, ArrowLeft, Calendar, Brain, Terminal } from 'lucide-re
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
-import { safeMarkdownHtml } from '@/lib/article-markdown'
+import { safeMarkdownHtml, articleSubjects } from '@/lib/article-markdown'
 
 interface BlogPostPageProps {
   params: { id: string }
@@ -40,6 +40,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     datePublished: post.createdAt.toISOString(),
     mainEntityOfPage: `https://blog.sashanksingh.com/blogs/${post.id}`,
     author: { '@type': 'Person', name: 'Sashank Singh', url: 'https://sashanksingh.com/' },
+    ...(articleSubjects(post.id) ? { about: articleSubjects(post.id) } : {}),
   }
 
   return (
