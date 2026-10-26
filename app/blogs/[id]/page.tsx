@@ -23,6 +23,25 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   }
 }
 
+const agentTwinArticle = {
+  id: 'agenttwin-retry-safety-20261025',
+  organization: {
+    '@type': 'Organization',
+    '@id': 'https://agenttwin.si/#organization',
+    name: 'AgentTwin',
+    url: 'https://agenttwin.si/',
+    sameAs: ['https://www.linkedin.com/in/sashanksingh08'],
+  },
+  software: {
+    '@type': 'SoftwareApplication',
+    '@id': 'https://agenttwin.si/#software',
+    name: 'AgentTwin',
+    url: 'https://agenttwin.si/',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Node.js 22.12+',
+  },
+} as const
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getBlogPost(params.id)
 
@@ -32,6 +51,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const renderedBody = safeMarkdownHtml(post.content)
 
+  const isAgentTwinArticle = post.id === agentTwinArticle.id
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -40,11 +60,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     datePublished: post.createdAt.toISOString(),
     mainEntityOfPage: `https://blog.sashanksingh.com/blogs/${post.id}`,
     author: { '@type': 'Person', name: 'Sashank Singh', url: 'https://sashanksingh.com/' },
+    ...(isAgentTwinArticle ? {
+      about: [
+        { '@id': agentTwinArticle.software['@id'] },
+        { '@type': 'Thing', name: 'Retry safety', sameAs: 'https://en.wikipedia.org/wiki/Idempotence' },
+      ],
+      mentions: [{ '@id': agentTwinArticle.organization['@id'] }, { '@id': agentTwinArticle.software['@id'] }],
+      publisher: { '@id': agentTwinArticle.organization['@id'] },
+    } : {}),
   }
 
   return (
     <div className="min-h-screen bg-dark-gradient matrix-bg">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(isAgentTwinArticle ? { '@context': 'https://schema.org', '@graph': [jsonLd, agentTwinArticle.organization, agentTwinArticle.software] } : jsonLd) }} />
       {/* Header */}
       <div className="diagonal-section bg-gradient-to-br from-cyber-dark via-purple-900/20 to-cyan-900/20 pb-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
